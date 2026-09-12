@@ -10,10 +10,13 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as CatalogoRouteImport } from './routes/catalogo'
+import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as ColeccionesRouteImport } from './routes/colecciones'
 import { Route as ContactoRouteImport } from './routes/contacto'
 import { Route as SobreDziRouteImport } from './routes/sobre-dzi'
+import { Route as VendedorRouteImport } from './routes/vendedor'
 import { Route as ProductoProductIdRouteImport } from './routes/producto.$productId'
 
 const IndexRoute = IndexRouteImport.update({
@@ -21,9 +24,19 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CatalogoRoute = CatalogoRouteImport.update({
   id: '/catalogo',
   path: '/catalogo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CheckoutRoute = CheckoutRouteImport.update({
+  id: '/checkout',
+  path: '/checkout',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ColeccionesRoute = ColeccionesRouteImport.update({
@@ -41,6 +54,11 @@ const SobreDziRoute = SobreDziRouteImport.update({
   path: '/sobre-dzi',
   getParentRoute: () => rootRouteImport,
 } as any)
+const VendedorRoute = VendedorRouteImport.update({
+  id: '/vendedor',
+  path: '/vendedor',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProductoProductIdRoute = ProductoProductIdRouteImport.update({
   id: '/producto/$productId',
   path: '/producto/$productId',
@@ -49,62 +67,83 @@ const ProductoProductIdRoute = ProductoProductIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/catalogo': typeof CatalogoRoute
+  '/checkout': typeof CheckoutRoute
   '/colecciones': typeof ColeccionesRoute
   '/contacto': typeof ContactoRoute
   '/sobre-dzi': typeof SobreDziRoute
+  '/vendedor': typeof VendedorRoute
   '/producto/$productId': typeof ProductoProductIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/catalogo': typeof CatalogoRoute
+  '/checkout': typeof CheckoutRoute
   '/colecciones': typeof ColeccionesRoute
   '/contacto': typeof ContactoRoute
   '/sobre-dzi': typeof SobreDziRoute
+  '/vendedor': typeof VendedorRoute
   '/producto/$productId': typeof ProductoProductIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/catalogo': typeof CatalogoRoute
+  '/checkout': typeof CheckoutRoute
   '/colecciones': typeof ColeccionesRoute
   '/contacto': typeof ContactoRoute
   '/sobre-dzi': typeof SobreDziRoute
+  '/vendedor': typeof VendedorRoute
   '/producto/$productId': typeof ProductoProductIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/admin'
     | '/catalogo'
+    | '/checkout'
     | '/colecciones'
     | '/contacto'
     | '/sobre-dzi'
+    | '/vendedor'
     | '/producto/$productId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/admin'
     | '/catalogo'
+    | '/checkout'
     | '/colecciones'
     | '/contacto'
     | '/sobre-dzi'
+    | '/vendedor'
     | '/producto/$productId'
   id:
     | '__root__'
     | '/'
+    | '/admin'
     | '/catalogo'
+    | '/checkout'
     | '/colecciones'
     | '/contacto'
     | '/sobre-dzi'
+    | '/vendedor'
     | '/producto/$productId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRoute
   CatalogoRoute: typeof CatalogoRoute
+  CheckoutRoute: typeof CheckoutRoute
   ColeccionesRoute: typeof ColeccionesRoute
   ContactoRoute: typeof ContactoRoute
   SobreDziRoute: typeof SobreDziRoute
+  VendedorRoute: typeof VendedorRoute
   ProductoProductIdRoute: typeof ProductoProductIdRoute
 }
 
@@ -117,11 +156,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/catalogo': {
       id: '/catalogo'
       path: '/catalogo'
       fullPath: '/catalogo'
       preLoaderRoute: typeof CatalogoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/checkout': {
+      id: '/checkout'
+      path: '/checkout'
+      fullPath: '/checkout'
+      preLoaderRoute: typeof CheckoutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/colecciones': {
@@ -145,6 +198,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SobreDziRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/vendedor': {
+      id: '/vendedor'
+      path: '/vendedor'
+      fullPath: '/vendedor'
+      preLoaderRoute: typeof VendedorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/producto/$productId': {
       id: '/producto/$productId'
       path: '/producto/$productId'
@@ -157,10 +217,13 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRoute,
   CatalogoRoute: CatalogoRoute,
+  CheckoutRoute: CheckoutRoute,
   ColeccionesRoute: ColeccionesRoute,
   ContactoRoute: ContactoRoute,
   SobreDziRoute: SobreDziRoute,
+  VendedorRoute: VendedorRoute,
   ProductoProductIdRoute: ProductoProductIdRoute,
 }
 export const routeTree = rootRouteImport
