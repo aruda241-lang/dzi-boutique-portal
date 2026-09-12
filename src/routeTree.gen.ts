@@ -10,33 +10,102 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CatalogoRouteImport } from './routes/catalogo'
+import { Route as ColeccionesRouteImport } from './routes/colecciones'
+import { Route as ContactoRouteImport } from './routes/contacto'
+import { Route as SobreDziRouteImport } from './routes/sobre-dzi'
+import { Route as ProductoProductIdRouteImport } from './routes/producto.$productId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CatalogoRoute = CatalogoRouteImport.update({
+  id: '/catalogo',
+  path: '/catalogo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ColeccionesRoute = ColeccionesRouteImport.update({
+  id: '/colecciones',
+  path: '/colecciones',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactoRoute = ContactoRouteImport.update({
+  id: '/contacto',
+  path: '/contacto',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SobreDziRoute = SobreDziRouteImport.update({
+  id: '/sobre-dzi',
+  path: '/sobre-dzi',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProductoProductIdRoute = ProductoProductIdRouteImport.update({
+  id: '/producto/$productId',
+  path: '/producto/$productId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/catalogo': typeof CatalogoRoute
+  '/colecciones': typeof ColeccionesRoute
+  '/contacto': typeof ContactoRoute
+  '/sobre-dzi': typeof SobreDziRoute
+  '/producto/$productId': typeof ProductoProductIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/catalogo': typeof CatalogoRoute
+  '/colecciones': typeof ColeccionesRoute
+  '/contacto': typeof ContactoRoute
+  '/sobre-dzi': typeof SobreDziRoute
+  '/producto/$productId': typeof ProductoProductIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/catalogo': typeof CatalogoRoute
+  '/colecciones': typeof ColeccionesRoute
+  '/contacto': typeof ContactoRoute
+  '/sobre-dzi': typeof SobreDziRoute
+  '/producto/$productId': typeof ProductoProductIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/catalogo'
+    | '/colecciones'
+    | '/contacto'
+    | '/sobre-dzi'
+    | '/producto/$productId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/catalogo'
+    | '/colecciones'
+    | '/contacto'
+    | '/sobre-dzi'
+    | '/producto/$productId'
+  id:
+    | '__root__'
+    | '/'
+    | '/catalogo'
+    | '/colecciones'
+    | '/contacto'
+    | '/sobre-dzi'
+    | '/producto/$productId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CatalogoRoute: typeof CatalogoRoute
+  ColeccionesRoute: typeof ColeccionesRoute
+  ContactoRoute: typeof ContactoRoute
+  SobreDziRoute: typeof SobreDziRoute
+  ProductoProductIdRoute: typeof ProductoProductIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +117,51 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/catalogo': {
+      id: '/catalogo'
+      path: '/catalogo'
+      fullPath: '/catalogo'
+      preLoaderRoute: typeof CatalogoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/colecciones': {
+      id: '/colecciones'
+      path: '/colecciones'
+      fullPath: '/colecciones'
+      preLoaderRoute: typeof ColeccionesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contacto': {
+      id: '/contacto'
+      path: '/contacto'
+      fullPath: '/contacto'
+      preLoaderRoute: typeof ContactoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sobre-dzi': {
+      id: '/sobre-dzi'
+      path: '/sobre-dzi'
+      fullPath: '/sobre-dzi'
+      preLoaderRoute: typeof SobreDziRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/producto/$productId': {
+      id: '/producto/$productId'
+      path: '/producto/$productId'
+      fullPath: '/producto/$productId'
+      preLoaderRoute: typeof ProductoProductIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CatalogoRoute: CatalogoRoute,
+  ColeccionesRoute: ColeccionesRoute,
+  ContactoRoute: ContactoRoute,
+  SobreDziRoute: SobreDziRoute,
+  ProductoProductIdRoute: ProductoProductIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
