@@ -1,24 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
-
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
-export const Route = createFileRoute("/")({
-  component: Index,
-});
-
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
-  return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
-  );
-}
+import {createFileRoute,Link} from "@tanstack/react-router";import {ArrowRight,Feather,Flame,Leaf,Wind} from "lucide-react";import hero from "@/assets/dzi-hero.jpg";import materials from "@/assets/dzi-materials.jpg";import {Button} from "@/components/ui/button";import {ProductCard} from "@/components/product-card";import {useDzi} from "@/lib/dzi-store";
+export const Route=createFileRoute("/")({head:()=>({meta:[{title:"DZI — El lujo de la tierra"},{name:"description",content:"Moda de lujo consciente creada con lana virgen, seda salvaje y tintes botánicos."},{property:"og:title",content:"DZI — El lujo de la tierra"},{property:"og:description",content:"Moda de lujo consciente nacida de fibras nobles y procesos honestos."},{property:"og:type",content:"website"},{name:"twitter:card",content:"summary_large_image"}]}),component:Home});
+const materialsList=[{icon:Feather,title:"Lana virgen",text:"Fibras largas seleccionadas por su calidez, caída y permanencia."},{icon:Leaf,title:"Tintes de nogal",text:"Tonos vivos extraídos lentamente de cáscaras y hojas recuperadas."},{icon:Flame,title:"Aislamiento térmico",text:"Arquitectura textil que abriga sin añadir peso innecesario."},{icon:Wind,title:"Seda salvaje",text:"Brillo irregular y textura honesta, conservando la huella de su origen."}];
+function Home(){const{products}=useDzi();return <><section className="relative min-h-[calc(100vh-5rem)] overflow-hidden"><img src={hero} alt="Abrigo Tierra de DZI" width={1280} height={1536} className="absolute inset-0 h-full w-full object-cover object-[55%_25%]"/><div className="absolute inset-0 bg-hero-shade"/><div className="relative mx-auto flex min-h-[calc(100vh-5rem)] max-w-7xl items-end px-6 pb-16 pt-24 lg:px-10"><div className="max-w-2xl"><p className="eyebrow">Colección origen · 2026</p><h1 className="mt-4 font-display text-6xl leading-[0.9] sm:text-8xl lg:text-[7.5rem]">DZI: El lujo<br/>de la tierra</h1><p className="mt-7 max-w-lg text-base leading-7 text-foreground/80">Abrigos construidos como refugios. Materia noble, proporción precisa y una elegancia que no pide atención.</p><Button asChild size="lg" className="mt-8"><Link to="/producto/$productId" params={{productId:"abrigo-tierra"}}>Descubrir el abrigo <ArrowRight/></Link></Button></div></div></section><section className="botanical py-24"><div className="mx-auto max-w-7xl px-6"><div className="grid gap-8 lg:grid-cols-[1fr_1.35fr]"><div><p className="eyebrow">Materia / 01</p><h2 className="section-title">Naturaleza táctil<br/>& botánica</h2><p className="mt-6 max-w-md leading-7 text-muted-foreground">Cada fibra conserva memoria: del clima, de la mano que la transformó y del tiempo que necesitó.</p></div><img src={materials} alt="Lana virgen y seda salvaje DZI" width={1280} height={912} loading="lazy" className="aspect-[16/10] w-full object-cover"/></div><div className="mt-14 grid border-y border-border md:grid-cols-4">{materialsList.map(({icon:Icon,title,text},i)=><article key={title} className={`p-7 md:min-h-60 ${i<3?"md:border-r md:border-border":""}`}><Icon className="size-5 text-accent"/><h3 className="mt-8 font-display text-2xl">{title}</h3><p className="mt-3 text-sm leading-6 text-muted-foreground">{text}</p></article>)}</div></div></section><section className="bg-surface py-24"><div className="mx-auto max-w-7xl px-6"><div className="mb-10 flex items-end justify-between"><div><p className="eyebrow">Selección esencial</p><h2 className="section-title">Piezas con propósito</h2></div><Link to="/catalogo" className="hidden items-center gap-2 text-sm md:flex">Ver catálogo <ArrowRight className="size-4"/></Link></div><div className="grid gap-8 md:grid-cols-3">{products.slice(0,3).map(p=><ProductCard key={p.id} p={p}/>)}</div></div></section><section className="botanical py-28"><div className="mx-auto grid max-w-7xl gap-14 px-6 lg:grid-cols-[.7fr_1.3fr]"><p className="eyebrow">Manifiesto / DZI</p><div><h2 className="font-display text-5xl leading-none sm:text-7xl">La arquitectura de un abrigo honesto</h2><div className="mt-10 grid gap-8 text-muted-foreground md:grid-cols-2"><p className="leading-7">No diseñamos para una temporada. Diseñamos para el ritual cotidiano de habitar el frío, con materiales capaces de envejecer con dignidad.</p><p className="leading-7">Cada silueta nace del equilibrio: volumen sin exceso, estructura sin rigidez y una procedencia que puede contarse de principio a fin.</p></div></div></div></section></>}
