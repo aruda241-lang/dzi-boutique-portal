@@ -1,5 +1,5 @@
 import { Link,useNavigate } from "@tanstack/react-router";
-import { Menu,Search,ShoppingBag,Minus,Plus,Leaf,Instagram,ArrowRight } from "lucide-react";
+import { Menu,Search,ShoppingBag,Minus,Plus,Leaf,Instagram,ArrowRight,User } from "lucide-react";
 import { useState,type ReactNode } from "react";
 import { Button } from "@/components/ui/button";
 import { Sheet,SheetContent,SheetHeader,SheetTitle } from "@/components/ui/sheet";
