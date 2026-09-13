@@ -2,7 +2,10 @@ import { createContext,useContext,useState,type ReactNode } from "react";
 import { initialOrders,initialProducts,type Order,type Product,type Role } from "./dzi-data";
 type CartItem={product:Product;quantity:number};
 export type Purchase={id:string;date:string;items:CartItem[];total:number;status:"Pagado"|"Enviado"|"Entregado"};
-type Store={role:Role;setRole:(r:Role)=>void;cart:CartItem[];cartOpen:boolean;setCartOpen:(v:boolean)=>void;add:(p:Product)=>void;remove:(id:string)=>void;quantity:(id:string,n:number)=>void;products:Product[];setProducts:React.Dispatch<React.SetStateAction<Product[]>>;orders:Order[];setOrders:React.Dispatch<React.SetStateAction<Order[]>>;purchases:Purchase[];placeOrder:(total:number)=>Purchase|null};
+export type Account={name:string;email:string;role:Role};
+export type Seller={email:string;name:string;active:boolean};
+export const initialWhitelist:Seller[]=[{email:"diego@dzi.pe",name:"Diego Salas",active:true},{email:"rocio@dzi.pe",name:"Rocío Ayala",active:true},{email:"nadia@dzi.pe",name:"Nadia Quispe",active:false}];
+type Store={role:Role;setRole:(r:Role)=>void;cart:CartItem[];cartOpen:boolean;setCartOpen:(v:boolean)=>void;add:(p:Product)=>void;remove:(id:string)=>void;quantity:(id:string,n:number)=>void;products:Product[];setProducts:React.Dispatch<React.SetStateAction<Product[]>>;orders:Order[];setOrders:React.Dispatch<React.SetStateAction<Order[]>>;purchases:Purchase[];placeOrder:(total:number)=>Purchase|null;account:Account|null;signIn:(a:Account)=>void;signOut:()=>void;whitelist:Seller[];setWhitelist:React.Dispatch<React.SetStateAction<Seller[]>>};
 const C=createContext<Store|undefined>(undefined);
 export function DziProvider({children}:{children:ReactNode}){
 const[role,setRole]=useState<Role>("Cliente");
@@ -15,5 +18,9 @@ const add=(product:Product)=>{setCart(c=>{const old=c.find(x=>x.product.id===pro
 const remove=(id:string)=>setCart(c=>c.filter(x=>x.product.id!==id));
 const quantity=(id:string,n:number)=>setCart(c=>n<1?c.filter(x=>x.product.id!==id):c.map(x=>x.product.id===id?{...x,quantity:n}:x));
 const placeOrder=(total:number)=>{if(cart.length===0)return null;const purchase:Purchase={id:`DZI-${1100+purchases.length}`,date:new Intl.DateTimeFormat("es-PE",{day:"2-digit",month:"short"}).format(new Date()),items:cart,total,status:"Pagado"};setPurchases(p=>[purchase,...p]);setCart([]);return purchase};
-return <C.Provider value={{role,setRole,cart,cartOpen,setCartOpen,add,remove,quantity,products,setProducts,orders,setOrders,purchases,placeOrder}}>{children}</C.Provider>}
+const[account,setAccount]=useState<Account|null>(null);
+const[whitelist,setWhitelist]=useState<Seller[]>(initialWhitelist);
+const signIn=(a:Account)=>{setAccount(a);setRole(a.role)};
+const signOut=()=>{setAccount(null);setRole("Cliente")};
+return <C.Provider value={{role,setRole,cart,cartOpen,setCartOpen,add,remove,quantity,products,setProducts,orders,setOrders,purchases,placeOrder,account,signIn,signOut,whitelist,setWhitelist}}>{children}</C.Provider>}
 export function useDzi(){const v=useContext(C);if(!v)throw new Error("DziProvider missing");return v}
