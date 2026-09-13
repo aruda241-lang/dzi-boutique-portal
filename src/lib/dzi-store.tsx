@@ -2,7 +2,10 @@ import { createContext,useContext,useState,type ReactNode } from "react";
 import { initialOrders,initialProducts,type Order,type Product,type Role } from "./dzi-data";
 type CartItem={product:Product;quantity:number};
 export type Purchase={id:string;date:string;items:CartItem[];total:number;status:"Pagado"|"Enviado"|"Entregado"};
-type Store={role:Role;setRole:(r:Role)=>void;cart:CartItem[];cartOpen:boolean;setCartOpen:(v:boolean)=>void;add:(p:Product)=>void;remove:(id:string)=>void;quantity:(id:string,n:number)=>void;products:Product[];setProducts:React.Dispatch<React.SetStateAction<Product[]>>;orders:Order[];setOrders:React.Dispatch<React.SetStateAction<Order[]>>;purchases:Purchase[];placeOrder:(total:number)=>Purchase|null};
+export type Account={name:string;email:string;role:Role};
+export type Seller={email:string;name:string;active:boolean};
+export const initialWhitelist:Seller[]=[{email:"diego@dzi.pe",name:"Diego Salas",active:true},{email:"rocio@dzi.pe",name:"Rocío Ayala",active:true},{email:"nadia@dzi.pe",name:"Nadia Quispe",active:false}];
+type Store={role:Role;setRole:(r:Role)=>void;cart:CartItem[];cartOpen:boolean;setCartOpen:(v:boolean)=>void;add:(p:Product)=>void;remove:(id:string)=>void;quantity:(id:string,n:number)=>void;products:Product[];setProducts:React.Dispatch<React.SetStateAction<Product[]>>;orders:Order[];setOrders:React.Dispatch<React.SetStateAction<Order[]>>;purchases:Purchase[];placeOrder:(total:number)=>Purchase|null;account:Account|null;signIn:(a:Account)=>void;signOut:()=>void;whitelist:Seller[];setWhitelist:React.Dispatch<React.SetStateAction<Seller[]>>};
 const C=createContext<Store|undefined>(undefined);
 export function DziProvider({children}:{children:ReactNode}){
 const[role,setRole]=useState<Role>("Cliente");
