@@ -15,6 +15,7 @@ import { Route as CatalogoRouteImport } from './routes/catalogo'
 import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as ColeccionesRouteImport } from './routes/colecciones'
 import { Route as ContactoRouteImport } from './routes/contacto'
+import { Route as MisPedidosRouteImport } from './routes/mis-pedidos'
 import { Route as SobreDziRouteImport } from './routes/sobre-dzi'
 import { Route as VendedorRouteImport } from './routes/vendedor'
 import { Route as ProductoProductIdRouteImport } from './routes/producto.$productId'
@@ -49,6 +50,11 @@ const ContactoRoute = ContactoRouteImport.update({
   path: '/contacto',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MisPedidosRoute = MisPedidosRouteImport.update({
+  id: '/mis-pedidos',
+  path: '/mis-pedidos',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SobreDziRoute = SobreDziRouteImport.update({
   id: '/sobre-dzi',
   path: '/sobre-dzi',
@@ -72,6 +78,7 @@ export interface FileRoutesByFullPath {
   '/checkout': typeof CheckoutRoute
   '/colecciones': typeof ColeccionesRoute
   '/contacto': typeof ContactoRoute
+  '/mis-pedidos': typeof MisPedidosRoute
   '/sobre-dzi': typeof SobreDziRoute
   '/vendedor': typeof VendedorRoute
   '/producto/$productId': typeof ProductoProductIdRoute
@@ -83,6 +90,7 @@ export interface FileRoutesByTo {
   '/checkout': typeof CheckoutRoute
   '/colecciones': typeof ColeccionesRoute
   '/contacto': typeof ContactoRoute
+  '/mis-pedidos': typeof MisPedidosRoute
   '/sobre-dzi': typeof SobreDziRoute
   '/vendedor': typeof VendedorRoute
   '/producto/$productId': typeof ProductoProductIdRoute
@@ -95,6 +103,7 @@ export interface FileRoutesById {
   '/checkout': typeof CheckoutRoute
   '/colecciones': typeof ColeccionesRoute
   '/contacto': typeof ContactoRoute
+  '/mis-pedidos': typeof MisPedidosRoute
   '/sobre-dzi': typeof SobreDziRoute
   '/vendedor': typeof VendedorRoute
   '/producto/$productId': typeof ProductoProductIdRoute
@@ -108,6 +117,7 @@ export interface FileRouteTypes {
     | '/checkout'
     | '/colecciones'
     | '/contacto'
+    | '/mis-pedidos'
     | '/sobre-dzi'
     | '/vendedor'
     | '/producto/$productId'
@@ -119,6 +129,7 @@ export interface FileRouteTypes {
     | '/checkout'
     | '/colecciones'
     | '/contacto'
+    | '/mis-pedidos'
     | '/sobre-dzi'
     | '/vendedor'
     | '/producto/$productId'
@@ -130,6 +141,7 @@ export interface FileRouteTypes {
     | '/checkout'
     | '/colecciones'
     | '/contacto'
+    | '/mis-pedidos'
     | '/sobre-dzi'
     | '/vendedor'
     | '/producto/$productId'
@@ -142,6 +154,7 @@ export interface RootRouteChildren {
   CheckoutRoute: typeof CheckoutRoute
   ColeccionesRoute: typeof ColeccionesRoute
   ContactoRoute: typeof ContactoRoute
+  MisPedidosRoute: typeof MisPedidosRoute
   SobreDziRoute: typeof SobreDziRoute
   VendedorRoute: typeof VendedorRoute
   ProductoProductIdRoute: typeof ProductoProductIdRoute
@@ -191,6 +204,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactoRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/mis-pedidos': {
+      id: '/mis-pedidos'
+      path: '/mis-pedidos'
+      fullPath: '/mis-pedidos'
+      preLoaderRoute: typeof MisPedidosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sobre-dzi': {
       id: '/sobre-dzi'
       path: '/sobre-dzi'
@@ -222,6 +242,7 @@ const rootRouteChildren: RootRouteChildren = {
   CheckoutRoute: CheckoutRoute,
   ColeccionesRoute: ColeccionesRoute,
   ContactoRoute: ContactoRoute,
+  MisPedidosRoute: MisPedidosRoute,
   SobreDziRoute: SobreDziRoute,
   VendedorRoute: VendedorRoute,
   ProductoProductIdRoute: ProductoProductIdRoute,
