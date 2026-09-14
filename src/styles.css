@@ -178,4 +178,6 @@
 .kpi span,.kpi small { color:var(--muted-foreground); font-size:.75rem; }
 .kpi strong { font-family:var(--font-display); font-size:2rem; font-weight:500; }
 @media (min-width:768px){.page-shell{padding-inline:2.5rem}.kpi strong{font-size:2.5rem}}
+@keyframes dzi-loading-spin { to { transform: rotate(360deg); } }
+.dzi-loading-ring { animation: dzi-loading-spin 1.2s linear infinite; }
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}

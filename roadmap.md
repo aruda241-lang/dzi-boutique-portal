@@ -6,3 +6,4 @@
 - [x] Panel operativo de vendedor
 - [x] Panel integral de administrador
 - [x] Validación de escritorio y móvil
+- [x] Pantalla de carga y página 404 con identidad DZI
