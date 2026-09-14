@@ -23,7 +23,7 @@ export function RefundsPanel({ by }: { by: string }) {
       <div className="mt-6 grid gap-3">
         {pending.length === 0 && <p className="border border-border bg-card p-6 text-sm text-muted-foreground">No hay pedidos en línea pendientes de gestionar.</p>}
         {pending.map((p) => {
-          const reason = reasons[p.id] ?? refundReasons[0];
+          const reason = reasons[p.id] ?? refundReasons[0] ?? "Devolución";
           return (
             <div key={p.id} className="flex flex-col gap-3 border border-border bg-card p-5 lg:flex-row lg:items-center">
               <div className="flex-1">
