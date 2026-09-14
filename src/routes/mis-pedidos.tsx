@@ -19,12 +19,32 @@ export const Route = createFileRoute("/mis-pedidos")({
 });
 
 function Page() {
-  const { purchases } = useDzi();
+  const { purchases, refunds } = useDzi();
   return (
     <div className="page-shell max-w-5xl">
       <p className="eyebrow">Tu cuenta</p>
       <h1 className="page-title">Mis pedidos</h1>
       <p className="mt-4 max-w-xl text-muted-foreground">Aquí aparecen las compras que ya han sido pagadas durante esta demostración.</p>
+
+      {refunds.length > 0 && (
+        <section className="mt-12">
+          <h2 className="font-display text-3xl">Devoluciones</h2>
+          <div className="mt-5 space-y-4">
+            {refunds.map((r) => (
+              <article key={r.id} className="border border-border bg-card p-6">
+                <div className="flex flex-wrap items-center justify-between gap-3">
+                  <b className="font-display text-2xl">{r.purchaseId}</b>
+                  <span className="status">Devolución {r.id}</span>
+                </div>
+                <p className="mt-2 text-sm text-muted-foreground">{r.productName} · {r.date}</p>
+                <p className="mt-3 text-sm text-warning">{r.reason}. Lamentamos el inconveniente: la pieza se vendió en nuestra tienda física antes de preparar tu envío.</p>
+                <p className="mt-3 text-sm">Se reembolsaron <b>{money(r.amount)}</b> a tu medio de pago original.</p>
+              </article>
+            ))}
+          </div>
+        </section>
+      )}
+
       {purchases.length === 0 ? (
         <div className="mt-12 grid place-items-center border border-border bg-card p-16 text-center">
           <PackageSearch className="mb-4 size-8 text-muted-foreground" />
@@ -32,6 +52,7 @@ function Page() {
           <Button asChild className="mt-6"><Link to="/catalogo">Ver catálogo</Link></Button>
         </div>
       ) : (
+
         <div className="mt-12 space-y-6">
           {purchases.map((o) => (
             <article key={o.id} className="border border-border bg-card p-7">
